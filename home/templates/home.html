@@ -1,0 +1,31 @@
+{% extends "base.html"%}
+
+
+{% block title %}
+    Home
+{% endblock title %}
+
+
+{% block links %}
+   <link rel="stylesheet" href="{{ url_for('home.static', filename = 'css/home_header.css') }}">
+{% endblock links %}
+
+{% block header %}
+    <div class="ellipse"></div>
+    <span class="slogan">
+        <p>ТЕХНОЛОГІЇ</p>
+        <p>ЯКІ ЗМІНЮЮТЬ РЕАЛЬНІСТЬ</p>
+    </span>
+    <img class="drones" src="{{ url_for('static', filename = 'icon/drones.svg') }}" alt="">
+    <span class="to-catalog">
+        <p>Передові технології в одному місці. Обирай найкраще для найважливішого.</p>
+        <a href="/shop">
+            <img src="{{ url_for('static', filename = 'icon/button.svg') }}" alt="">
+        </a>
+    </span>
+{% endblock %}
+
+{% block content %}
+    <h1> Home Page </h1>
+{% endblock content %}
+    

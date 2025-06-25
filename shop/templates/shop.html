@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Shop    
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="">
+{% endblock %}
+
+{% block content %}
+    <h1>Shop page</h1>
+    <!--  -->
+    {% if current_user.is_admin %}
+        <div>
+            <h3>Форма створення нового продукту</h3>
+            <form action="" method="post" enctype="multipart/form-data">
+                <!--  -->
+                <label for="name_product">Вкажіть назву продукту: </label>
+                <p>
+                    <input type="text" name="name_product" max="100" min="50" required>
+                </p>
+                <!--  -->
+                <label for="description">Вкажіть опис продукту: </label>
+                <p>
+                    <textarea name="description" id="" placeholder="Вкажіть опис продукту" required></textarea>
+                </p>
+                <!--  -->
+                <label for="price">Вкажіть вартість за одиницю продукту: </label>
+                <p>
+                    <input type="number" name="price" max="50000" min="1000" required>
+                </p>
+                <!--  -->
+                <label for="discount">Вкажіть знижку за одиницю продукту у відсотках: </label>
+                <p>
+                    <input type="number" name="discount" max="100" min="5" required>
+                </p>
+                <!--  -->
+                <label for="count">Вкажіть загальну кількість продукту: </label>
+                <p>
+                    <input type="number" name="count" max="1000" min="1" required>
+                </p>
+                <!--  -->
+                <label for="image">Оберіть зображення продукту: </label>
+                <p>
+                    <input type="file" name="image" accept="image/*" required>
+                </p>
+                <!--  -->
+                <button type="submit">Send</button>
+            </form>
+            {% if message %}
+                <p>{{ message }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
+    <!--  -->
+    {% if list_products %}
+        {% for product in list_products %}
+            <div>
+                <hr>
+                <img src="{{ url_for('shop.static', filename= 'images/products/' + product.name_product + '.png') }}" alt="{{ product.name_product }}" width="300px" height="300px">
+                <h4>Назва продукту: {{ product.name_product }}</h4>
+                <h5>Вартість за одиницю продукта: {{ product.price }} грн.</h5>
+                <p>Знижка на одиницю продукта: {{ product.discount }} %</p>
+                <p>Кількість продукту: {{ product.count }} шт.</p>
+                <p>Опис продукту: {{ product.description }}</p>
+
+                <!-- <a href="/buy?id={{product.id}}">BUY</a> -->
+                <button class="buy" id="{{product.id}}" type="button">BUY</button>
+                {% if current_user.is_admin %}
+                    <a href= "/delete_product?id={{product.id}}">Видалити продукт</a>
+                {% endif %}
+                <hr>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+{% block scripts %}
+    <script src = "{{ url_for('shop.static', filename = 'js/addProductToCart.js')}}"></script>
+{% endblock %}

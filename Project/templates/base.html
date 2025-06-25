@@ -1,0 +1,67 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}  {% endblock title %}</title>
+        {% block links %} {% endblock %}
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/base.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/header.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/logo.css') }}">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <span class= "links">
+                    <a href="/shop">КАТАЛОГ</a>
+                    <a href="/about">ПРО НАС</a>
+                    <a href="/contacts">КОНТАКТИ</a>
+                </span>
+
+                
+                <a  class="logo" href="/">
+                    <img src="{{ url_for('static', filename = 'icon/logo.svg') }}" alt="">
+                </a>
+                
+                
+                <span class="profile">
+                    <a href="/cart">
+                        <!-- <img src="{{ url_for('static', filename = 'icon/cart.svg') }}" alt=""> -->
+                        <div class="cart"></div>
+                    </a>
+                    {% if current_user.is_authenticated %}
+                        <p>{{ current_user.username }}</p>
+                        <a href="/logout">Exit</a>
+                    {% else %}
+                        <a href="/profile">
+                            <div class="img-profile"></div>
+                            <!-- <img src="{{ url_for('static', filename = 'icon/profile.svg') }}" alt=""> -->
+                        </a>
+                        <!-- <a href="/registration"> Registration</a>
+                        <a href="/authorization">Authorization</a> -->
+                    {% endif %}  
+                </span>
+            </nav>
+            {% block header %}
+                
+            {% endblock %}
+            <!-- <div class="ellipse"></div>
+            <span class="slogan">
+                <p>ТЕХНОЛОГІЇ</p>
+                <p>ЯКІ ЗМІНЮЮТЬ РЕАЛЬНІСТЬ</p>
+            </span>
+            <img class="drones" src="{{ url_for('static', filename = 'icon/drones.svg') }}" alt="">
+            <span class="to-catalog">
+                <p>Передові технології в одному місці. Обирай найкраще для найважливішого.</p>
+                <a href="/shop">
+                    <img src="{{ url_for('static', filename = 'icon/button.svg') }}" alt="">
+                </a>
+            </span>
+        </header> -->
+        <main>
+            {% block content %} {% endblock %}
+        </main>
+        {% block scripts %} 
+
+        {% endblock %}
+    </body>
+</html>

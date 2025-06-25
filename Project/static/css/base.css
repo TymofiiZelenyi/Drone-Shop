@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+body{
+    /* Auto Layout */
+    display: flex;
+    /* Задаємо основну вісь "Вертикальна" */
+    flex-direction: column; 
+    /* Напрямок контенту по головній (вертикаль) вісі "зверху" */
+    justify-content: start;
+    /* Напрямок контенту по додатковії (горизонталь) вісі "по центру" */
+    align-items: center;
+    background-color: #FFFFFF;
+}
